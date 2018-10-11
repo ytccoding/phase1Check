@@ -22,16 +22,15 @@ def apkSpilt():
 
 def apkDeZip():
    if os.path.isfile(appName + ".apk"):#反組譯
-      subprocess.Popen("{}\\{}\\apktool d -f {}\\{}.apk -o {}\\{}".format(ogCwd ,"apktool" ,os.getcwd() ,appName ,ogCwd ,url_Number) \
-                       ,stdout=PIPE ,stderr=PIPE ,stdin=PIPE ,shell = True).stdout.read().decode('utf-8')
       if os.path.isfile("{}//{}".format(ogCwd ,url_Number)) != True:
          #subprocess.call("{}\\{}\\apktool d -f {}\\{}.apk -o {}\\{}".format(ogCwd ,"apktool" ,os.getcwd() ,appName ,ogCwd ,url_Number) ,shell = True)
          process = subprocess.Popen("{}\\{}\\apktool d -f {}\\{}.apk -o {}\\{}".format(ogCwd ,"apktool" ,os.getcwd() ,appName ,ogCwd ,url_Number) \
                                     ,stdout=PIPE ,stderr=PIPE ,stdin=PIPE ,shell = True)
          process.wait()
    elif os.path.isfile(appName + ".apk.crdownload"):
-      subprocess.Popen("{}\\{}\\apktool d -f {}\\{}.apk.crdownload -o {}\\{}".format(ogCwd ,"apktool" ,os.getcwd() ,appName ,ogCwd ,url_Number) \
       if os.path.isfile("{}//{}".format(ogCwd ,url_Number)) != True:
+         #subprocess.call("{}\\{}\\apktool d -f {}\\{}.apk.crdownload -o {}\\{}".format(ogCwd ,"apktool" ,os.getcwd() ,appName ,ogCwd ,url_Number) ,shell = True)
+         process = subprocess.Popen("{}\\{}\\apktool d -f {}\\{}.apk.crdownload -o {}\\{}".format(ogCwd ,"apktool" ,os.getcwd() ,appName ,ogCwd ,url_Number)\
                                      ,stdout=PIPE ,stderr=PIPE ,stdin=PIPE ,shell = True)
          process.wait()
    else:
