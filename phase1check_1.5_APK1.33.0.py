@@ -24,20 +24,25 @@ def apkDeZip():
    if os.path.isfile(appName + ".apk"):#反組譯
       subprocess.Popen("{}\\{}\\apktool d -f {}\\{}.apk -o {}\\{}".format(ogCwd ,"apktool" ,os.getcwd() ,appName ,ogCwd ,url_Number) \
                        ,stdout=PIPE ,stderr=PIPE ,stdin=PIPE ,shell = True).stdout.read().decode('utf-8')
+      if os.path.isfile("{}//{}".format(ogCwd ,url_Number)) != True:
+         #subprocess.call("{}\\{}\\apktool d -f {}\\{}.apk -o {}\\{}".format(ogCwd ,"apktool" ,os.getcwd() ,appName ,ogCwd ,url_Number) ,shell = True)
+         process = subprocess.Popen("{}\\{}\\apktool d -f {}\\{}.apk -o {}\\{}".format(ogCwd ,"apktool" ,os.getcwd() ,appName ,ogCwd ,url_Number) \
+                                    ,stdout=PIPE ,stderr=PIPE ,stdin=PIPE ,shell = True)
+         process.wait()
    elif os.path.isfile(appName + ".apk.crdownload"):
       subprocess.Popen("{}\\{}\\apktool d -f {}\\{}.apk.crdownload -o {}\\{}".format(ogCwd ,"apktool" ,os.getcwd() ,appName ,ogCwd ,url_Number) \
-                        ,stdout=PIPE ,stderr=PIPE ,stdin=PIPE ,shell = True).stdout.read().decode('utf-8')
+      if os.path.isfile("{}//{}".format(ogCwd ,url_Number)) != True:
+                                     ,stdout=PIPE ,stderr=PIPE ,stdin=PIPE ,shell = True)
+         process.wait()
    else:
       return "NG"
    
    defCountTime = 0
-   
    while os.path.isfile('{}\\{}\\res\\values\\strings.xml'.format(ogCwd ,url_Number)) != True:
       sleep(1)
       defCountTime = defCountTime + 1
-      if defCountTime == 5:
-         return "NG"
-      
+      if defCountTime == 10:
+         return "NG" 
    return "OK"
 
 def osRemove(text):
@@ -326,7 +331,7 @@ while True:
             requestUrl4 = "OK"
             
    if url != "":
-      print(url_Number ,url_name ,apkSpilt() ,"DB:{}".format(specDBList[specDB])) #輸出結果
+      print(url_Number ,url_name ,"DB:{}".format(specDBList[specDB])) #輸出結果,先拿掉,apkSpilt()
       print(urlCheck)
       print()
       if requestUrl1 != "OK":
